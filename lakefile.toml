@@ -1,0 +1,13 @@
+name = "LoopSubgroups"
+defaultTargets = ["LoopSubgroups"]
+
+[leanOptions]
+autoImplicit = false
+
+[[require]]
+name = "TauCeti"
+git = "https://github.com/TauCetiProject/TauCeti"
+rev = "v4.37.0-rc1"
+
+[[lean_lib]]
+name = "LoopSubgroups"
