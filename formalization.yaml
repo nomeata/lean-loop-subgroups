@@ -1,0 +1,198 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Loop subgroups of F_r and the image of their stabilizer subgroups in GL_r(Z)"
+  description: >-
+    Formalization of J. Breitner's paper on loop subgroups of the free group F_r.
+    For a loop subgroup U of F_r with r >= 3 and at most r - 2 looplets, the image
+    of its stabilizer in Aut(F_r) under the abelianization map B : Aut(F_r) -> GL_r(Z)
+    is the congruence subgroup of level 2 of matrices M with v M = v (mod 2), where
+    v_i is 1 if the i-th loop has even length and 0 otherwise. Also formalized:
+    generation of the level-2 principal congruence subgroup and of S(v), the
+    general upper bound for arbitrary finite-index subgroups, the excluded case of
+    r - 1 looplets, and the existence and index of loop subgroups.
+  authors:
+    - "Joachim Breitner"
+    - "Claude (Anthropic), via Claude Code"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Joachim Breitner"
+
+classification:
+  arxiv: ["math.GR"]
+  msc2020: ["20E36", "20E05", "20H05"]
+
+sources:
+  - title: "Loop subgroups of F_r and the image of their stabilizer subgroups in GL_r(Z)"
+    authors:
+      - "Joachim Breitner"
+    id: "https://doi.org/10.1007/s11856-011-0213-3"
+    type: "article"
+    location: "Israel Journal of Mathematics (2011); arXiv:1012.2729v2"
+    relationship: "formalizes"
+    license: "unknown"
+    author_endorsement: "participated"
+  - title: "Loop subgroups of F_r and the images of their stabilizer subgroups in GL_r(Z) (Diploma thesis)"
+    authors:
+      - "Joachim Breitner"
+    type: "thesis"
+    location: "Karlsruher Institut für Technologie, Fakultät für Mathematik; LaTeX source in Diplomarbeit.tex"
+    relationship: "background"
+    note: "Longer version of the article; used for proof details. Thesis-only chapters are not formalized."
+    license: "unknown"
+    author_endorsement: "participated"
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/mathlib4"
+    relationship: "builds-on"
+    note: "Uses Mathlib's free groups, permutations, cycles, alternating groups and matrix groups."
+  - id: "https://github.com/TauCetiProject/TauCeti"
+    relationship: "builds-on"
+    note: >-
+      Uses Tau Ceti's elementary matrices in GL (transvectionUnit), the Chevalley
+      commutator relation, and generation of SL_n(Z) by elementary matrices.
+
+status:
+  scope: >-
+    Formalized: Definition 1 (for any basis of any free group), Remarks 3, 4, 6, 17,
+    Lemma 5 (coordinate-free generalisation plus the paper's S_n form), Corollary 7,
+    Lemma 8 (with the additional, necessary hypothesis r >= 3), Definition 9,
+    Lemmas 10, 12, 13, 14, Propositions 15, 16, 18 and Theorem 1 in all of its
+    formulations; existence of s_1/.../s_r loop subgroups with index 1 + sum(s_i - 1),
+    and Example 2. Finite index of the loop subgroup is assumed as a hypothesis rather
+    than derived from Definition 1. Not formalized: that s_1 is exactly the congruence
+    level in Proposition 18 (only Gamma_{s_1} <= B(Stab U) is proved), uniqueness of the
+    loop subgroup for given lengths, the free basis of U given after Example 2,
+    Example 11, the probabilistic remark in the preface, and thesis-only material.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+  main_results:
+    - declaration: "LoopSubgroups.image_Stab_eq"
+      file: "LoopSubgroups/Main.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+    - declaration: "LoopSubgroups.image_stabilizer_eq"
+      file: "LoopSubgroups/General.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+    - declaration: "LoopSubgroups.image_Stab_eq_latticeStab"
+      file: "LoopSubgroups/Excluded.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["claude-opus-5-5"]
+      framework: "Claude Code"
+      tool_setup: >-
+        One main agent wrote the statements, the free-group and stabilizer parts and the
+        assembly; parallel sub-agents proved Lemma 5, Remark 6 / Corollary 7, Lemma 8 and
+        Section 9 against statements fixed by the main agent. Checked with lake / lean.
+      cost:
+        wall_time: "about 2 hours, one session"
+        spend_usd: "not tracked"
+        hardware: "local machine (Lean builds), API for the model"
+      prompting_notes: >-
+        Single request to formalize the paper (with the thesis LaTeX provided), building
+        on Mathlib and Tau Ceti; follow-up requests for documentation and this file.
+  spend_usd: "not tracked"
+  notes: >-
+    The human (the author of the paper) chose the target and libraries; the code was
+    written by the AI agents. See BLUEPRINT.md for the statement map.
+
+fidelity:
+  divergences: >-
+    (1) Lemma 8 gets the hypothesis r >= 3; the paper's statement is false for r = 2 and
+    v = (1,1), but the paper only uses r >= 3. (2) The paper does not prove that the
+    generator inversions tau_j stabilize U; the formalization adds this argument.
+    (3) Lemma 5 is proved in a coordinate-free generalisation, from which the paper's form
+    follows. (4) Remark 17 is stated with the induced map psi given; the characteristic
+    kernel hypothesis is kept but not needed. (5) Loop subgroups are assumed to have
+    finite index. (6) The free group is FreeGroup ι for a finite type ι (r = card ι), with
+    a transport to arbitrary free groups with arbitrary bases.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "none (human statement review pending)"
+  notes: >-
+    Statements were written to match the paper and checked by the formalizing agent;
+    the build, sorry-freedom and axioms were checked mechanically. No independent human
+    review of the formal statements yet.
+
+alignment:
+  namespace: "LoopSubgroups"
+  statements:
+    - source: "Definition 1"
+      lean: "LoopSubgroups.IsLoopSubgroup"
+      module: "LoopSubgroups.Defs"
+      status: "adapted"
+      note: "Standard basis; LoopSubgroups.IsLoopSubgroupWrt in LoopSubgroups.General for an arbitrary basis."
+    - source: "Lemma 5"
+      lean: "LoopSubgroups.alternatingGroup_le_commutator"
+      module: "LoopSubgroups.Perm"
+      status: "proved"
+      note: "Generalisation: LoopSubgroups.mem_commutator_closure_of_sign_eq_one."
+    - source: "Remark 6"
+      lean: "LoopSubgroups.closure_gamma2Gens"
+      module: "LoopSubgroups.Matrix.Gamma2"
+      status: "proved"
+    - source: "Corollary 7"
+      lean: "LoopSubgroups.Γ₂_le_of_gens'"
+      module: "LoopSubgroups.Matrix.Gamma2"
+      status: "proved"
+    - source: "Lemma 8"
+      lean: "LoopSubgroups.closure_stabGens"
+      module: "LoopSubgroups.Matrix.StabMod2"
+      status: "adapted"
+      note: "Additional hypothesis r >= 3 (necessary)."
+    - source: "Definition 9"
+      lean: "LoopSubgroups.B"
+      module: "LoopSubgroups.FreeGroup"
+      status: "proved"
+    - source: "Lemma 10"
+      lean: "LoopSubgroups.X_mem_image"
+      module: "LoopSubgroups.LowerBound"
+      status: "proved"
+    - source: "Lemma 12"
+      lean: "LoopSubgroups.X_two_mem_image"
+      module: "LoopSubgroups.LowerBound"
+      status: "proved"
+    - source: "Lemma 13"
+      lean: "LoopSubgroups.XX_mem_image"
+      module: "LoopSubgroups.LowerBound"
+      status: "proved"
+    - source: "Lemma 14"
+      lean: "LoopSubgroups.Γ₂_le_image_Stab"
+      module: "LoopSubgroups.Main"
+      status: "proved"
+    - source: "Proposition 15"
+      lean: "LoopSubgroups.S_le_map_image"
+      module: "LoopSubgroups.LowerBound"
+      status: "proved"
+    - source: "Proposition 16"
+      lean: "LoopSubgroups.image_le_comap_S"
+      module: "LoopSubgroups.UpperBound"
+      status: "proved"
+    - source: "Theorem 1"
+      lean: "LoopSubgroups.image_Stab_eq"
+      module: "LoopSubgroups.Main"
+      status: "proved"
+      note: >-
+        Also LoopSubgroups.mem_image_Stab_iff (introduction form),
+        LoopSubgroups.map_reduce_image_Stab (Section 8 form) and
+        LoopSubgroups.image_stabilizer_eq (arbitrary basis).
+    - source: "Remark 17"
+      lean: "LoopSubgroups.map_stabilizer_eq"
+      module: "LoopSubgroups.Excluded"
+      status: "proved"
+    - source: "Proposition 18"
+      lean: "LoopSubgroups.image_Stab_eq_latticeStab"
+      module: "LoopSubgroups.Excluded"
+      status: "partial"
+      note: "Also LoopSubgroups.Γ_le_image_Stab; the claim that s_1 is exactly the level is not formalized."
+
+acknowledgements: "Mathlib, Tau Ceti, and the Lean FRO."
