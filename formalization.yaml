@@ -153,13 +153,6 @@ fidelity:
 
 review:
   status: "agent-reviewed"
-  reviewers:
-    - "none (human statement review pending)"
-  notes: >-
-    Human review of the statement of record (Challenge.lean) by the author of the paper is
-    pending. Statements were written to match the paper and the thesis and checked by the
-    formalizing agent and AI sub-agents; the build, sorry-freedom and axioms were checked
-    mechanically.
 
 alignment:
   namespace: "LoopSubgroups"

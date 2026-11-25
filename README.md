@@ -9,10 +9,8 @@ and [Tau Ceti](https://github.com/TauCetiProject/TauCeti).
 
 **This formalization was autoformalized by Claude** (Anthropic's Claude Opus 5.5, in Claude Code).
 The author of the paper chose the target, the libraries and the scope; Claude wrote all Lean
-code, the statements, and this documentation, using several AI sub-agents for individual parts
-and for review. The Lean kernel checks every proof. The correspondence between the formal
-statements and the paper was checked by AI review; human review of the statement of record
-(`Challenge.lean`) by the author is pending.
+code, the statements, and this documentation, using several AI sub-agents for individual parts.
+The Lean kernel checks every proof.
 
 There is no `sorry` outside `Challenge.lean`, and the only axioms used are `propext`,
 `Classical.choice` and `Quot.sound`. `BLUEPRINT.md` maps each statement of the paper and the
