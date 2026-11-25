@@ -40,8 +40,9 @@ sources:
   - title: "Loop subgroups of F_r and the images of their stabilizer subgroups in GL_r(Z) (Diploma thesis)"
     authors:
       - "Joachim Breitner"
+    id: "https://www.joachim-breitner.de/various/DA/LoopSubgroupDiplomaThesis.pdf"
     type: "thesis"
-    location: "Karlsruher Institut für Technologie, Fakultät für Mathematik (unpublished)"
+    location: "Karlsruher Institut für Technologie, Fakultät für Mathematik; https://www.joachim-breitner.de/various/DA/LoopSubgroupDiplomaThesis.pdf"
     relationship: "formalizes"
     note: >-
       Longer version of the article. Its mathematical content beyond the article is

@@ -4,7 +4,7 @@ A Lean 4 formalization of J. Breitner, *Loop subgroups of F_r and the image of t
 subgroups in GL_r(Z)*, Israel J. Math. 191 (2012), 545–557
 ([doi:10.1007/s11856-011-0213-3](https://doi.org/10.1007/s11856-011-0213-3);
 [arXiv:1012.2729](https://arxiv.org/abs/1012.2729)), and of further material from the author's
-Diplomarbeit (Karlsruher Institut für Technologie). It builds on Mathlib
+[Diplomarbeit](https://www.joachim-breitner.de/various/DA/LoopSubgroupDiplomaThesis.pdf) (Karlsruher Institut für Technologie). It builds on Mathlib
 and [Tau Ceti](https://github.com/TauCetiProject/TauCeti).
 
 **This formalization was autoformalized by Claude** (Anthropic's Claude Opus 5.5, in Claude Code).
@@ -133,7 +133,7 @@ of the unclaimed Tau Ceti roadmap
 ## Sources, previous work, licence
 
 * **Sources.** The formalization follows the paper and, for proof details and the additional
-  material, the author's Diplomarbeit. A literature search (zbMATH, Crossref, OpenAlex,
+  material, the author's [Diplomarbeit](https://www.joachim-breitner.de/various/DA/LoopSubgroupDiplomaThesis.pdf). A literature search (zbMATH, Crossref, OpenAlex,
   Semantic Scholar, targeted full-text checks; Google Scholar and MathSciNet were not accessible)
   found no work citing, duplicating or generalizing the paper's main results; novelty of the
   mathematics is therefore as in the 2011 paper, and no claim beyond that is made.
