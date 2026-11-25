@@ -11,7 +11,11 @@ project:
     v_i is 1 if the i-th loop has even length and 0 otherwise. Also formalized:
     generation of the level-2 principal congruence subgroup and of S(v), the
     general upper bound for arbitrary finite-index subgroups, the excluded case of
-    r - 1 looplets, and the existence and index of loop subgroups.
+    r - 1 looplets, existence, uniqueness, index and a free basis of loop subgroups.
+    From the author's Diplomarbeit additionally: the CosetProject algorithm with a
+    correctness proof, maximality and index 2^r - 1 of S(v), the index of B(Stab U)
+    in GL_r(Z), the theorem on index-two subgroups, unboundedness of the stabilizer
+    index, and generators of intersections with index-two subgroups.
   authors:
     - "Joachim Breitner"
     - "Claude (Anthropic), via Claude Code"
@@ -38,8 +42,10 @@ sources:
       - "Joachim Breitner"
     type: "thesis"
     location: "Karlsruher Institut für Technologie, Fakultät für Mathematik; LaTeX source in Diplomarbeit.tex"
-    relationship: "background"
-    note: "Longer version of the article; used for proof details. Thesis-only chapters are not formalized."
+    relationship: "formalizes"
+    note: >-
+      Longer version of the article. Its mathematical content beyond the article is
+      largely formalized as well (see status.scope).
     license: "unknown"
     author_endorsement: "participated"
 
@@ -59,12 +65,15 @@ status:
     Lemma 5 (coordinate-free generalisation plus the paper's S_n form), Corollary 7,
     Lemma 8 (with the additional, necessary hypothesis r >= 3), Definition 9,
     Lemmas 10, 12, 13, 14, Propositions 15, 16, 18 and Theorem 1 in all of its
-    formulations; existence of s_1/.../s_r loop subgroups with index 1 + sum(s_i - 1),
-    and Example 2. Finite index of the loop subgroup is assumed as a hypothesis rather
-    than derived from Definition 1. Not formalized: that s_1 is exactly the congruence
-    level in Proposition 18 (only Gamma_{s_1} <= B(Stab U) is proved), uniqueness of the
-    loop subgroup for given lengths, the free basis of U given after Example 2,
-    Example 11, the probabilistic remark in the preface, and thesis-only material.
+    formulations; existence, uniqueness, finite index, index formula and free basis of
+    s_1/.../s_r loop subgroups; Example 2; the exact congruence level in the excluded
+    case. From the thesis: Lemma index2intersection, the CosetProject algorithm
+    (computable, with termination and correctness), Lemma unboundstabgroup, Lemmas
+    stabconj and max, the index bound of the discussion, and the theorem on index-two
+    subgroups. Not formalized: Example 11, the probabilistic remark in the preface,
+    the Todd-Coxeter approach, subgroup-intersection and generator-rewriting procedures,
+    run-time analysis, congruence-level detection, discussion examples, the GAP table,
+    and the background chapter.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Classical.choice", "Quot.sound"]
@@ -81,6 +90,14 @@ status:
       file: "LoopSubgroups/Excluded.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
+    - declaration: "LoopSubgroups.map_reduce_image_Stab_of_index_two"
+      file: "LoopSubgroups/IndexTwo.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+    - declaration: "LoopSubgroups.CosetProject.cosetProject_correct"
+      file: "LoopSubgroups/CosetProject.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
 
 automation:
   methods:
@@ -90,9 +107,12 @@ automation:
       tool_setup: >-
         One main agent wrote the statements, the free-group and stabilizer parts and the
         assembly; parallel sub-agents proved Lemma 5, Remark 6 / Corollary 7, Lemma 8 and
-        Section 9 against statements fixed by the main agent. Checked with lake / lean.
+        Section 9 against statements fixed by the main agent; in a second round, seven
+        sub-agents formalized further paper and thesis material in parallel (the
+        CosetProject agent also designed its own statements, reviewed by the main agent).
+        Checked with lake / lean.
       cost:
-        wall_time: "about 2 hours, one session"
+        wall_time: "about 3 hours, one session"
         spend_usd: "not tracked"
         hardware: "local machine (Lean builds), API for the model"
       prompting_notes: >-
@@ -111,8 +131,13 @@ fidelity:
     (3) Lemma 5 is proved in a coordinate-free generalisation, from which the paper's form
     follows. (4) Remark 17 is stated with the induced map psi given; the characteristic
     kernel hypothesis is kept but not needed. (5) Loop subgroups are assumed to have
-    finite index. (6) The free group is FreeGroup ι for a finite type ι (r = card ι), with
-    a transport to arbitrary free groups with arbitrary bases.
+    finite index (derivable, IsLoopSubgroup.finiteIndex). (6) The free group is FreeGroup ι for a finite type ι (r = card ι), with
+    a transport to arbitrary free groups with arbitrary bases. (7) Thesis Lemma
+    unboundstabgroup: its proof is flawed (pi(g_i)^n need not be an s_i-cycle); a
+    different proof is formalized, as quantitative bounds in ENat. (8) Thesis Lemma max
+    is proved for r >= 2 instead of r >= 3. (9) CosetProject: the merged check is done
+    before every relator instead of once per row, Coincidence uses an explicit stack
+    instead of recursion, and coset tables are functions Fin n -> letter -> Fin n.
 
 review:
   status: "agent-reviewed"
@@ -193,6 +218,38 @@ alignment:
       lean: "LoopSubgroups.image_Stab_eq_latticeStab"
       module: "LoopSubgroups.Excluded"
       status: "partial"
-      note: "Also LoopSubgroups.Γ_le_image_Stab; the claim that s_1 is exactly the level is not formalized."
+      note: "Also LoopSubgroups.Γ_le_image_Stab and LoopSubgroups.Γ_le_image_Stab_iff (s_1 is the level)."
+    - source: "Definition 1, uniqueness; basis after Example 2"
+      lean: "LoopSubgroups.IsLoopSubgroup.eq_loopSubgroup"
+      module: "LoopSubgroups.Uniqueness"
+      status: "proved"
+      note: "Basis: LoopSubgroups.exists_basis_loopSubgroup in LoopSubgroups.Basis."
+    - source: "Thesis, Lemma index2intersection"
+      lean: "LoopSubgroups.closure_inf_of_index_eq_two"
+      module: "LoopSubgroups.IndexTwoIntersection"
+      status: "proved"
+    - source: "Thesis, Algorithm CosetProject (termination and correctness)"
+      lean: "LoopSubgroups.CosetProject.cosetProject_correct"
+      module: "LoopSubgroups.CosetProject"
+      status: "adapted"
+      note: "Merged check before every relator; explicit stack for Coincidence."
+    - source: "Thesis, Lemma unboundstabgroup"
+      lean: "LoopSubgroups.index_le_card_mul_card_quotient_Stab"
+      module: "LoopSubgroups.Unbounded"
+      status: "proved"
+      note: "Different proof; the thesis' proof has a gap."
+    - source: "Thesis, Lemmas stabconj and max"
+      lean: "LoopSubgroups.isCoatom_S"
+      module: "LoopSubgroups.Matrix.Maximal"
+      status: "proved"
+      note: "Also LoopSubgroups.exists_S_eq_conj and LoopSubgroups.index_S; max proved for r >= 2."
+    - source: "Thesis, discussion: index of B(Stab U)"
+      lean: "LoopSubgroups.index_image_Stab"
+      module: "LoopSubgroups.Discussion"
+      status: "proved"
+    - source: "Thesis, theorem on index two subgroups"
+      lean: "LoopSubgroups.map_reduce_image_Stab_of_index_two"
+      module: "LoopSubgroups.IndexTwo"
+      status: "proved"
 
 acknowledgements: "Mathlib, Tau Ceti, and the Lean FRO."

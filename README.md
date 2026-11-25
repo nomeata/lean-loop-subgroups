@@ -32,6 +32,24 @@ There is no `sorry`, and the only axioms used are `propext`, `Classical.choice` 
   explicitly from its coset graph. Its index is `1 + Σ(s_i − 1)`.
 * **Example 2.** The 3/3/1 loop subgroup has index 5, and `B(Stab U) = GL_3(ℤ)`. This is an
   instance of the thesis's "odd case", `image_Stab_eq_top_of_odd`.
+* **More from the paper:**
+  * loop subgroups have finite index, and their lengths determine them;
+  * the index formula `[F_r : U] = 1 + Σ(s_i − 1)`;
+  * the free basis `{g_i^{s_i}} ∪ {g_i^{-k} g_j g_i^k}` given after Example 2;
+  * in the excluded case, `s_1` is exactly the congruence level.
+
+## Material from the Diplomarbeit
+
+* **CosetProject algorithm:** a computable Lean implementation (`CosetProject.cosetProject`).
+  Its correctness theorem says that the output table is a coset table of `U ⊔ ⟪R⟫`, the preimage
+  of `π(U)`.
+* **Lemma `index2intersection`:** generators of `U ∩ S` for `S` of index two.
+* **Lemma `unboundstabgroup`:** `[Aut(F_r) : Stab U] ≥ s_i`, and `[F_r : U] ≤ r · [Aut(F_r) : Stab U]`.
+* **Lemmas `stabconj` and `max`:** `S(v)` is conjugate to `S(𝟙)`, and it is maximal in
+  `GL_r(ℤ/2ℤ)` (already for `r ≥ 2`). Its index is `2^r − 1`.
+* **Discussion section:** `[GL_r(ℤ) : B(Stab U)]` is `1` if all loops are odd, and `2^r − 1`
+  otherwise.
+* **Index-two subgroups:** `B̄(Stab U) = S(v)` with `v_i = 1` iff `g_i ∉ U`.
 
 ## Corrections and additions to the paper
 
@@ -43,17 +61,22 @@ There is no `sorry`, and the only axioms used are `propext`, `Classical.choice` 
 3. **Remark 17 doesn't need the characteristic kernel** once the induced map is given.
 4. **Proposition 18.** The preimages that show `B` is surjective are the Nielsen moves.
 5. **Typo in the preface:** `B(GL_r(ℤ))` should be `B(Stab(U))`.
+6. **Gap in Lemma `unboundstabgroup` (thesis).** The proof assumes that `π(g_i)^n` is an
+   `s_i`-cycle, which fails when `gcd(n, s_i) > 1`. The statement still holds, and the formal
+   proof uses a different test word.
+7. **Lemma `max`** needs only `r ≥ 2`, not `r ≥ 3`.
+8. **CosetProject.** The formal version repeats the "row merged?" check before every relator. It
+   is not proved that the pseudocode's once-per-row check is safe. See `BLUEPRINT.md`.
 
 ## Not formalized
 
-* That `s_1` is exactly the congruence level in Proposition 18. Only `Γ_{s_1} ≤ B(Stab U)` is
-  proved.
-* That the loop lengths determine the loop subgroup.
-* The free basis of `U` given after Example 2, and Example 11.
-* The probabilistic remark in the preface.
-* That Definition 1 implies finite index. It is assumed as a hypothesis instead.
-* Thesis-only material: the CosetProject algorithm, maximality of `S(v)`, index-two subgroups,
-  and the counting appendix.
+* Example 11, and the probabilistic remark in the preface.
+* Thesis-only material:
+  * Todd–Coxeter, the subgroup-intersection and generator-rewriting procedures, and the run-time
+    analysis;
+  * the congruence-level detection, which needs `Γ_l = ⟪X₁₂^l⟫`;
+  * the discussion examples and the GAP table;
+  * chapter 1, which Mathlib already covers.
 
 ## Building
 

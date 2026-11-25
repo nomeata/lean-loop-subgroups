@@ -24,15 +24,18 @@ Status: **everything listed below is proved.** There is no `sorry`, and only the
 * `X hij c` is `X_ij(c) = 1 + c E_ij`. The paper's `X_ij` is `X hij 1`, and its `X_ij²` is
   `X hij 2`.
 * "At most `r − 2` looplets" is written `(univ.filter (s · = 1)).card + 2 ≤ card ι`.
-* A loop subgroup is assumed to have finite index (`[U.FiniteIndex]`). The paper works with
-  subgroups of a fixed index `n` throughout.
+* Most theorems take `[U.FiniteIndex]` as a hypothesis. It follows from Definition 1 when all
+  `s_i ≥ 1` (`IsLoopSubgroup.finiteIndex`); `image_Stab_eq_of_isLoopSubgroup` states Theorem 1
+  without it.
 
 ## Paper ↔ Lean
 
 | Paper | Lean | File |
 |---|---|---|
 | Def. 1 (loop subgroup) | `IsLoopSubgroup`, `IsLoopRep`; for an arbitrary basis: `IsLoopSubgroupWrt` | `Defs.lean`, `General.lean` |
-| Def. 1: "the lengths determine `U`", Fig. 1 | explicit model `loopSubgroup s` with `isLoopSubgroup_loopSubgroup`, and `index_loopSubgroup` (index `1 + Σ(s_i−1)`) | `Existence.lean` |
+| Def. 1: existence, Fig. 1 | explicit model `loopSubgroup s` with `isLoopSubgroup_loopSubgroup`, and `index_loopSubgroup` (index `1 + Σ(s_i−1)`) | `Existence.lean` |
+| Def. 1: "the lengths determine `U`" | `IsLoopSubgroup.eq_loopSubgroup`; also `IsLoopSubgroup.finiteIndex`, `IsLoopSubgroup.index_eq` | `Uniqueness.lean` |
+| Basis of `U` after Example 2 | `exists_basis_loopSubgroup` | `Basis.lean` |
 | Example 2 (3/3/1) | `s331` examples: it is a loop subgroup, has index 5, and `B(Stab) = GL_3(ℤ)` | `Examples.lean` |
 | §3, π | `MulAction.toPermHom F (F ⧸ U)`; abstractly, a representation `ρ` with base point `x₀` | |
 | Rem. 3 (1) | `stabPt_toPermHom` | `UpperBound.lean` |
@@ -51,12 +54,25 @@ Status: **everything listed below is proved.** There is no `sorry`, and only the
 | Lemma 14 | `Γ₂_le_image`, `Γ₂_le_image_Stab` | `LowerBound.lean`, `Main.lean` |
 | Prop. 15 | `S_le_map_image` | `LowerBound.lean` |
 | Prop. 16 | `image_le_comap_S` (any finite-index `U`); `reduce_B_mem_S` (any representation) | `UpperBound.lean` |
-| **Theorem 1** | `image_Stab_eq` (`B(Stab U) = {M ∣ v·M̄ = v}`); `mem_image_Stab_iff` (intro form, `v ∈ ℤ^r`, congruence mod 2); `Γ₂_le_image_Stab` + `map_reduce_image_Stab` (§8 form); `image_stabilizer_eq` (arbitrary basis) | `Main.lean`, `General.lean` |
+| **Theorem 1** | `image_Stab_eq` (`B(Stab U) = {M ∣ v·M̄ = v}`); `image_Stab_eq_of_isLoopSubgroup` (no finite-index hypothesis); `mem_image_Stab_iff` (intro form, `v ∈ ℤ^r`, congruence mod 2); `Γ₂_le_image_Stab` + `map_reduce_image_Stab` (§8 form); `image_stabilizer_eq` (arbitrary basis) | `Main.lean`, `General.lean` |
 | Thesis "odd case" | `image_Stab_eq_top_of_odd` | `Examples.lean` |
 | Rem. 17 | `map_stabilizer_eq` | `Excluded.lean` |
 | §9, `U = {w ∣ #_{g_1} w ≡ 0}` | `IsLoopSubgroup.eq_of_looplets` | `Excluded.lean` |
 | §9, B surjective | `B_surjective` | `Excluded.lean` |
 | Prop. 18 | `image_Stab_eq_latticeStab`, `Γ_le_image_Stab` | `Excluded.lean` |
+| After Prop. 18: "`s_1` is the level" | `Γ_le_image_Stab_iff` (`Γ_l ≤ B(Stab U) ↔ s_1 ∣ l`) | `ExcludedLevel.lean` |
+
+## Thesis-only material
+
+| Thesis | Lean | File |
+|---|---|---|
+| Lemma `index2intersection` | `closure_inf_of_index_eq_two` | `IndexTwoIntersection.lean` |
+| Algorithm `cosetproject` (CosetProject), termination and correctness | `CosetProject.cosetProject` (computable), `CosetProject.cosetProject_correct`, `CosetProject.cosetProject_correct'` | `CosetProject.lean` |
+| Lemma `unboundstabgroup` | `le_card_quotient_Stab`, `index_le_card_mul_card_quotient_Stab` | `Unbounded.lean` |
+| Lemma `stabconj` | `exists_S_eq_conj` | `Matrix/Maximal.lean` |
+| Lemma `max` | `isCoatom_S` (for `r ≥ 2`; the thesis assumes `r ≥ 3`) | `Matrix/Maximal.lean` |
+| Discussion: index of `B(Stab U)` is at most `2^r − 1` | `index_S`, `index_image_Stab` (exactly `1` or `2^r − 1`), `reduce_surjective` | `Matrix/Maximal.lean`, `Discussion.lean` |
+| Theorem on index-two subgroups | `image_Stab_of_index_two`, `map_reduce_image_Stab_of_index_two` | `IndexTwo.lean` |
 
 ## Remarks on the paper found while formalizing
 
@@ -78,16 +94,28 @@ Status: **everything listed below is proved.** There is no `sorry`, and only the
    the proof of Lemma 10". What is meant are the Nielsen moves (`w = 1`). The formal proof uses
    `g_j ↦ g_i^c g_j` together with `SL_r(ℤ) = E_r(ℤ)` from Tau Ceti.
 6. Typo in the preface: "the image `B(GL_r(ℤ))`" should be "`B(Stab(U))`".
+7. **Gap in Lemma `unboundstabgroup` (thesis).** The proof claims that `π(g_i)^n` is again an
+   `s_i`-cycle for `1 ≤ n < s_i`. This fails when `gcd(n, s_i) > 1`. The statement is still true:
+   the formal proof uses the test word `g_i⁻¹ g_j g_i ∈ U`, whose images under the powers `γ^n`
+   are not in `U` for `0 < n < s_i`.
+8. **Lemma `max` holds for `r ≥ 2`.** The proof goes through 2-transitivity of `GL_r(𝔽₂)` on
+   nonzero vectors.
+9. **CosetProject.** The formal implementation checks "row `i` already merged?" before every
+   relator, not once per row as in the pseudocode. Otherwise a row merged during its own relator
+   loop could reappear in the table. A random search found no input where this actually happens,
+   but that is not proved. `Coincidence` uses an explicit stack instead of recursion. The converse
+   direction `i ≡ j ⇒ i ≈ j` is proved via the normal subgroup `{w ∣ ∀k, f(ρ(w)k) = f(k)}`
+   instead of induction on the conjugating word.
+10. **Lemma `index2intersection`.** The formal proof is a closure induction instead of the
+    word-based induction.
 
 ## Not formalized
 
-* The claim after Prop. 18 that `s_1` is exactly the congruence level. Only `Γ_{s_1} ≤ B(Stab U)`
-  is proved.
-* Uniqueness of the loop subgroup for given lengths with respect to a fixed basis. Existence is
-  proved.
-* The free basis of `U` given after Example 2.
-* Example 11 (the explicit automorphisms for 3/3/1).
 * The probabilistic remark in the preface (Dixon, Gilman).
-* That Definition 1 implies finite index; it is assumed instead.
-* Thesis-only material: the CosetProject algorithm, Lemma `unboundstabgroup`, maximality of
-  `S(v)`, index-two subgroups, and the counting appendix.
+* Example 11 (the explicit automorphisms for 3/3/1), and the two examples in the thesis'
+  discussion.
+* Thesis-only material: the Todd–Coxeter approach, the subgroup-intersection algorithm, the
+  rewriting of the `Aut(F_r)` generators and of the map `B` in terms of generators, the run-time
+  analysis, the congruence-level detection (it relies on `Γ_l = ⟪X₁₂^l⟫` from Sury), and the GAP
+  table in the appendix.
+* Chapter 1 (fundamentals): Mathlib already provides this background.
