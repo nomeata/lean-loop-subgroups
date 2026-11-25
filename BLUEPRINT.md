@@ -38,7 +38,9 @@ Status: **everything listed below is proved.** There is no `sorry`, and only the
 | Basis of `U` after Example 2 | `exists_basis_loopSubgroup` | `Basis.lean` |
 | Example 2 (3/3/1) | `s331` examples: it is a loop subgroup, has index 5, and `B(Stab) = GL_3(ℤ)` | `Examples.lean` |
 | §3, π | `MulAction.toPermHom F (F ⧸ U)`; abstractly, a representation `ρ` with base point `x₀` | |
+| Def. 1: invariance under `Aut(F_r)` | `IsLoopSubgroupWrt.map` | `Invariance.lean` |
 | Rem. 3 (1) | `stabPt_toPermHom` | `UpperBound.lean` |
+| Rem. 3 (2) | `toPermHom_eq_one_iff` (`π(w) = Id ↔ w ∈ NT(U)`) | `Invariance.lean` |
 | Rem. 3 (3) | `cosetPerm`, `toPermHom_aut` | `UpperBound.lean` |
 | Rem. 4 | `elemAut` and `B_elemAut` (automorphism); `elemAut_mem_Stab`, generalised to `mem_Stab_of_conj` (stabilizes `U`) | `FreeGroup.lean`, `LowerBound.lean` |
 | Lemma 5 | `mem_commutator_closure_of_sign_eq_one` (coordinate-free generalisation); `alternatingGroup_le_commutator` (paper's form) | `Perm.lean` |

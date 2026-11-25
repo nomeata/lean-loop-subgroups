@@ -21,3 +21,4 @@ import LoopSubgroups.Uniqueness
 import LoopSubgroups.ExcludedLevel
 import LoopSubgroups.Basis
 import LoopSubgroups.CosetProject
+import LoopSubgroups.Invariance
