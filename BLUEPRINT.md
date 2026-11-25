@@ -1,7 +1,7 @@
 # Blueprint: Loop subgroups of F_r
 
 Formalization of J. Breitner, *Loop subgroups of F_r and the image of their stabilizer
-subgroups in GL_r(Z)*, Israel J. Math. (2011),
+subgroups in GL_r(Z)*, Israel J. Math. 191 (2012), 545–557,
 [doi:10.1007/s11856-011-0213-3](https://doi.org/10.1007/s11856-011-0213-3),
 [arXiv:1012.2729](https://arxiv.org/abs/1012.2729). The same material is the loop-subgroup chapter
 of the Diplomarbeit (`Diplomarbeit.tex`).
