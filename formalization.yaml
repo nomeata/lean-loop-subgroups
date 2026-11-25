@@ -118,8 +118,7 @@ automation:
         One main agent wrote the statements, the free-group and stabilizer parts and the
         assembly; parallel sub-agents proved Lemma 5, Remark 6 / Corollary 7, Lemma 8 and
         Section 9 against statements fixed by the main agent; in a second round, seven
-        sub-agents formalized further paper and thesis material in parallel (the
-        CosetProject agent also designed its own statements, reviewed by the main agent).
+        sub-agents formalized further paper and thesis material in parallel.
         Checked with lake / lean.
       cost:
         wall_time: "about 3 hours, one session"
