@@ -12,3 +12,11 @@ import LoopSubgroups.Transfer
 import LoopSubgroups.Existence
 import LoopSubgroups.General
 import LoopSubgroups.Examples
+import LoopSubgroups.Matrix.Maximal
+import LoopSubgroups.Discussion
+import LoopSubgroups.IndexTwo
+import LoopSubgroups.IndexTwoIntersection
+import LoopSubgroups.Unbounded
+import LoopSubgroups.Uniqueness
+import LoopSubgroups.ExcludedLevel
+import LoopSubgroups.Basis
