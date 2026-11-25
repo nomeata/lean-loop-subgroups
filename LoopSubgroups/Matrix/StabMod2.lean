@@ -1,5 +1,6 @@
 module
 
+public import LoopSubgroups.Compat
 public import LoopSubgroups.Matrix.Defs
 
 @[expose] public section
@@ -66,9 +67,9 @@ theorem reach_X {v : ι → ZMod 2} {s : Finset ι} {i j : ι} (hij : i ≠ j) (
     (hj : j ∉ s) (w : ι → ZMod 2) : Reach v s w (Function.update w i (w i + w j)) := by
   refine ⟨X hij 1, Subgroup.subset_closure (Or.inl ⟨i, j, hij, hv, rfl⟩), fun q hq => ?_, ?_⟩
   · have : q ≠ j := by rintro rfl; exact hj hq
-    simp only [TauCeti.transvectionUnit_mulVec]
+    simp only [transvectionUnit_mulVec]
     simp [Pi.single_apply, Ne.symm this]
-  · simp only [TauCeti.transvectionUnit_mulVec, one_mul]
+  · simp only [transvectionUnit_mulVec, one_mul]
 
 theorem reach_XX {v : ι → ZMod 2} {s : Finset ι} {i j k : ι} (hik : i ≠ k) (hjk : j ≠ k)
     (hij : i ≠ j) (hi : v i = 1) (hj : v j = 1) (hk : k ∉ s) (w : ι → ZMod 2) :
@@ -76,11 +77,11 @@ theorem reach_XX {v : ι → ZMod 2} {s : Finset ι} {i j k : ι} (hik : i ≠ k
   refine ⟨X hik 1 * X hjk 1,
     Subgroup.subset_closure (Or.inr ⟨i, j, k, hik, hjk, hij, hi, hj, rfl⟩), fun q hq => ?_, ?_⟩
   · have : q ≠ k := by rintro rfl; exact hk hq
-    simp only [Units.val_mul, ← mulVec_mulVec, TauCeti.transvectionUnit_mulVec]
+    simp only [Units.val_mul, ← mulVec_mulVec, transvectionUnit_mulVec]
     ext l
     simp only [Function.update_apply, Pi.single_apply]
     split_ifs <;> simp_all
-  · simp only [Units.val_mul, ← mulVec_mulVec, TauCeti.transvectionUnit_mulVec]
+  · simp only [Units.val_mul, ← mulVec_mulVec, transvectionUnit_mulVec]
     simp [hij, Ne.symm hjk]
 
 /-- `A = X_pk X_jk X_kp X_kj` acts on coordinates `(p, j, k)` by
@@ -90,7 +91,7 @@ theorem swapElt_mulVec {p j k : ι} (hpk : p ≠ k) (hjk : j ≠ k) (hpj : p ≠
     ((X hpk 1 * X hjk 1 * X hpk.symm 1 * X hjk.symm 1 : GL ι (ZMod 2)) : Matrix ι ι (ZMod 2))
       *ᵥ x = fun l => if l = p then x j + x k else if l = j then x p + x k
         else if l = k then x p + x j + x k else x l := by
-  simp only [Units.val_mul, ← mulVec_mulVec, TauCeti.transvectionUnit_mulVec]
+  simp only [Units.val_mul, ← mulVec_mulVec, transvectionUnit_mulVec]
   ext l
   simp only [Function.update_apply]
   split_ifs <;> subst_vars <;> simp_all <;> ring_nf <;> reduce_mod_char

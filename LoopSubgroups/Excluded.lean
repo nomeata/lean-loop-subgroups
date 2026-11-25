@@ -1,5 +1,6 @@
 module
 
+public import LoopSubgroups.Compat
 public import LoopSubgroups.Main
 public import TauCeti.LinearAlgebra.Matrix.GeneralLinearGroup.Elementary
 
@@ -61,7 +62,7 @@ theorem B_surjective : Function.Surjective (B (ι := ι)) := by
     have hu : FreeGroup.of i ^ c ∈ avoiding j := zpow_mem hgi c
     refine ⟨elemAut j _ hu, B_elemAut_eq_X hij hu c fun a => ?_⟩
     simp [count, Pi.single_apply]
-  rw [TauCeti.elementarySubgroup_eq_ker_det_of_euclideanDomain] at hE
+  rw [elementarySubgroup_eq_ker_det_int] at hE
   intro M
   rcases Int.units_eq_one_or (Matrix.GeneralLinearGroup.det M) with h | h
   · exact hE h

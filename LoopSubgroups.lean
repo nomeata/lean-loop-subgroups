@@ -1,6 +1,7 @@
 module
 
 public import LoopSubgroups.Matrix.Defs
+public import LoopSubgroups.Compat
 public import LoopSubgroups.Matrix.Gamma2
 public import LoopSubgroups.Matrix.StabMod2
 public import LoopSubgroups.Perm

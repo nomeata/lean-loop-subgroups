@@ -1,5 +1,6 @@
 module
 
+public import LoopSubgroups.Compat
 public import LoopSubgroups.Matrix.Defs
 public import TauCeti.LinearAlgebra.Matrix.GeneralLinearGroup.Elementary
 
@@ -18,9 +19,7 @@ variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 /-- Reduction `GL_r(ℤ) → GL_r(ℤ/2ℤ)` is surjective. -/
 theorem reduce_surjective : Function.Surjective (reduce (ι := ι)) := by
   intro g
-  have hg : g ∈ TauCeti.elementarySubgroup ι (ZMod 2) := by
-    rw [TauCeti.elementarySubgroup_eq_ker_det_of_euclideanDomain, MonoidHom.mem_ker]
-    exact Subsingleton.elim _ _
+  have hg : g ∈ TauCeti.elementarySubgroup ι (ZMod 2) := mem_elementarySubgroup_zmod_two g
   have : TauCeti.elementarySubgroup ι (ZMod 2) ≤ (reduce (ι := ι)).range := by
     rw [TauCeti.elementarySubgroup_def, Subgroup.closure_le]
     rintro _ ⟨i, j, hij, a, rfl⟩
