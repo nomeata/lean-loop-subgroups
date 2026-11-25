@@ -7,3 +7,8 @@ import LoopSubgroups.Defs
 import LoopSubgroups.LowerBound
 import LoopSubgroups.UpperBound
 import LoopSubgroups.Main
+import LoopSubgroups.Excluded
+import LoopSubgroups.Transfer
+import LoopSubgroups.Existence
+import LoopSubgroups.General
+import LoopSubgroups.Examples
