@@ -1,5 +1,9 @@
-import LoopSubgroups.Main
-import LoopSubgroups.Matrix.Maximal
+module
+
+public import LoopSubgroups.Main
+public import LoopSubgroups.Matrix.Maximal
+
+@[expose] public section
 
 /-!
 # The index of `B(Stab(U))` (thesis, Section "Discussion and further directions")

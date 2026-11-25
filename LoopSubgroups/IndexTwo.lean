@@ -1,6 +1,10 @@
-import LoopSubgroups.Main
-import LoopSubgroups.Excluded
-import LoopSubgroups.Matrix.Maximal
+module
+
+public import LoopSubgroups.Main
+public import LoopSubgroups.Excluded
+public import LoopSubgroups.Matrix.Maximal
+
+@[expose] public section
 
 /-!
 # Index two subgroups of `F_r` (thesis, Section "Index two subgroups of F_r")

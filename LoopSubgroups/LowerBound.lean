@@ -1,7 +1,11 @@
-import LoopSubgroups.Defs
-import LoopSubgroups.Perm
-import LoopSubgroups.Matrix.Gamma2
-import LoopSubgroups.Matrix.StabMod2
+module
+
+public import LoopSubgroups.Defs
+public import LoopSubgroups.Perm
+public import LoopSubgroups.Matrix.Gamma2
+public import LoopSubgroups.Matrix.StabMod2
+
+@[expose] public section
 
 /-!
 # The lower bound (Sections 6 and 7 of the paper)

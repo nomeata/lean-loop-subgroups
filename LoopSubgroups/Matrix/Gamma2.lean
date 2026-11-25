@@ -1,4 +1,8 @@
-import LoopSubgroups.Matrix.Defs
+module
+
+public import LoopSubgroups.Matrix.Defs
+
+@[expose] public section
 
 /-!
 # Generators of the principal congruence subgroup of level two
@@ -72,7 +76,7 @@ lemma X_mem {a b : ι} (hab : a ≠ b) {c : ℤ} (hc : c % 2 = 0) : X hab c ∈ 
   have h : X hab (m * 2) = TauCeti.transvectionHom hab (Multiplicative.ofAdd (m • (2 : ℤ))) := by
     simp [mul_comm]
   rw [h, ofAdd_zsmul, map_zpow]
-  exact zpow_mem (Subgroup.subset_closure (Or.inl ⟨a, b, hab, rfl⟩)) _
+  exact zpow_mem (Subgroup.subset_closure (Or.inl ⟨a, b, hab, by simp [TauCeti.transvectionHom_apply, X]⟩)) _
 
 lemma T_mem (p : ι) : (T p : GL ι ℤ) ∈ K :=
   Subgroup.subset_closure (Or.inr ⟨p, rfl⟩)

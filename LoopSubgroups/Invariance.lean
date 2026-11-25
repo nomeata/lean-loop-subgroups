@@ -1,4 +1,8 @@
-import LoopSubgroups.General
+module
+
+public import LoopSubgroups.General
+
+@[expose] public section
 
 /-!
 # Two small statements from the paper

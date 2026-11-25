@@ -1,5 +1,9 @@
-import LoopSubgroups.Matrix.Defs
-import TauCeti.LinearAlgebra.Matrix.GeneralLinearGroup.Elementary
+module
+
+public import LoopSubgroups.Matrix.Defs
+public import TauCeti.LinearAlgebra.Matrix.GeneralLinearGroup.Elementary
+
+@[expose] public section
 
 /-!
 # Maximality and index of `S(v)` (thesis, Section "Maximality")

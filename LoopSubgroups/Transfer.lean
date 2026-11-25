@@ -1,4 +1,8 @@
-import LoopSubgroups.UpperBound
+module
+
+public import LoopSubgroups.UpperBound
+
+@[expose] public section
 
 /-!
 # Transporting Definition 1 along equivariant bijections

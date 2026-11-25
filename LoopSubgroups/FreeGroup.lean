@@ -1,4 +1,8 @@
-import LoopSubgroups.Matrix.Defs
+module
+
+public import LoopSubgroups.Matrix.Defs
+
+@[expose] public section
 
 /-!
 # The map `B : Aut(F_r) → GL_r(ℤ)` and some automorphisms of free groups

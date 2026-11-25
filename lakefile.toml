@@ -1,5 +1,5 @@
 name = "LoopSubgroups"
-defaultTargets = ["LoopSubgroups"]
+defaultTargets = ["LoopSubgroups", "Challenge", "Solution"]
 
 [leanOptions]
 autoImplicit = false
@@ -11,3 +11,11 @@ rev = "v4.37.0-rc1"
 
 [[lean_lib]]
 name = "LoopSubgroups"
+
+[[lean_lib]]
+name = "Challenge"
+roots = ["Challenge"]
+
+[[lean_lib]]
+name = "Solution"
+roots = ["Solution"]

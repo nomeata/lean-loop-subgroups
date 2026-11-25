@@ -1,4 +1,8 @@
-import LoopSubgroups.Existence
+module
+
+public import LoopSubgroups.Existence
+
+@[expose] public section
 
 /-!
 # Examples and special cases

@@ -1,4 +1,8 @@
-import LoopSubgroups.LowerBound
+module
+
+public import LoopSubgroups.LowerBound
+
+@[expose] public section
 
 /-!
 # The upper bound (Section 8 of the paper)

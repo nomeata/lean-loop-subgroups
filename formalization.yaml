@@ -78,6 +78,16 @@ status:
   sorry_in_definitions: 0
   axioms: ["propext", "Classical.choice", "Quot.sound"]
   main_results:
+    - declaration: "LoopSubgroups.Challenge.main"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
+    - declaration: "LoopSubgroups.Challenge.exists_isLoopSubgroup"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
     - declaration: "LoopSubgroups.image_Stab_eq"
       file: "LoopSubgroups/Main.lean"
       sorry_count: 0
@@ -120,8 +130,10 @@ automation:
         on Mathlib and Tau Ceti; follow-up requests for documentation and this file.
   spend_usd: "not tracked"
   notes: >-
-    The human (the author of the paper) chose the target and libraries; the code was
-    written by the AI agents. See BLUEPRINT.md for the statement map.
+    Autoformalized by Claude. The human (the author of the paper) chose the target, the
+    libraries and the scope; all Lean code, statements and documentation were written by
+    AI agents. See BLUEPRINT.md
+    for the statement map.
 
 fidelity:
   divergences: >-
@@ -144,9 +156,10 @@ review:
   reviewers:
     - "none (human statement review pending)"
   notes: >-
-    Statements were written to match the paper and checked by the formalizing agent;
-    the build, sorry-freedom and axioms were checked mechanically. No independent human
-    review of the formal statements yet.
+    Human review of the statement of record (Challenge.lean) by the author of the paper is
+    pending. Statements were written to match the paper and the thesis and checked by the
+    formalizing agent and AI sub-agents; the build, sorry-freedom and axioms were checked
+    mechanically.
 
 alignment:
   namespace: "LoopSubgroups"

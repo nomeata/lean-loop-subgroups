@@ -1,5 +1,9 @@
-import LoopSubgroups.Main
-import TauCeti.LinearAlgebra.Matrix.GeneralLinearGroup.Elementary
+module
+
+public import LoopSubgroups.Main
+public import TauCeti.LinearAlgebra.Matrix.GeneralLinearGroup.Elementary
+
+@[expose] public section
 
 /-!
 # The excluded case (Section 9 of the paper)

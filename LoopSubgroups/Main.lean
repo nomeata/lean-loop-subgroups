@@ -1,4 +1,8 @@
-import LoopSubgroups.UpperBound
+module
+
+public import LoopSubgroups.UpperBound
+
+@[expose] public section
 
 /-!
 # The main theorem (Theorem 1)

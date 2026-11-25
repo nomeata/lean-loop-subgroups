@@ -1,5 +1,9 @@
-import LoopSubgroups.Transfer
-import LoopSubgroups.Excluded
+module
+
+public import LoopSubgroups.Transfer
+public import LoopSubgroups.Excluded
+
+@[expose] public section
 
 /-!
 # The main theorem for an arbitrary free group with an arbitrary basis

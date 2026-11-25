@@ -1,4 +1,8 @@
-import Mathlib
+module
+
+public import Mathlib
+
+@[expose] public section
 
 /-!
 # The CosetProject algorithm (Algorithm `algo:cosetproject`)

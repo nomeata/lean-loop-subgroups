@@ -1,4 +1,8 @@
-import Mathlib
+module
+
+public import Mathlib
+
+@[expose] public section
 
 /-!
 # Generators of the intersection with an index two subgroup (thesis, Lemma `index2intersection`)

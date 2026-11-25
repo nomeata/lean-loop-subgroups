@@ -1,5 +1,9 @@
-import LoopSubgroups.Transfer
-import LoopSubgroups.Main
+module
+
+public import LoopSubgroups.Transfer
+public import LoopSubgroups.Main
+
+@[expose] public section
 
 /-!
 # Existence of loop subgroups

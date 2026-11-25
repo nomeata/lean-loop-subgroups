@@ -1,4 +1,8 @@
-import LoopSubgroups.FreeGroup
+module
+
+public import LoopSubgroups.FreeGroup
+
+@[expose] public section
 
 /-!
 # Loop subgroups (Definition 1) and stabilizers

@@ -1,4 +1,8 @@
-import LoopSubgroups.Matrix.Defs
+module
+
+public import LoopSubgroups.Matrix.Defs
+
+@[expose] public section
 
 /-!
 # Generators of the stabilizer `S(v)` of a row vector in `GL_r(ℤ/2ℤ)`

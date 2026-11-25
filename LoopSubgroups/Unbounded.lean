@@ -1,4 +1,8 @@
-import LoopSubgroups.Main
+module
+
+public import LoopSubgroups.Main
+
+@[expose] public section
 
 /-!
 # The stabilizer index is unbounded (thesis, Lemma `unboundstabgroup`)

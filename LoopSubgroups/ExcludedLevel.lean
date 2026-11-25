@@ -1,4 +1,8 @@
-import LoopSubgroups.Excluded
+module
+
+public import LoopSubgroups.Excluded
+
+@[expose] public section
 
 /-!
 # The level in the excluded case

@@ -1,4 +1,8 @@
-import LoopSubgroups.Existence
+module
+
+public import LoopSubgroups.Existence
+
+@[expose] public section
 
 /-!
 # Loop subgroups are determined by their loop lengths

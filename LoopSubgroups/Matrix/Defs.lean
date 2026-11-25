@@ -1,5 +1,9 @@
-import Mathlib
-import TauCeti.LinearAlgebra.Matrix.GeneralLinearGroup.Transvection
+module
+
+public import Mathlib
+public import TauCeti.LinearAlgebra.Matrix.GeneralLinearGroup.Transvection
+
+@[expose] public section
 
 /-!
 # Matrix groups used in the paper (Section 4 and 5)

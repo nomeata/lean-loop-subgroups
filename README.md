@@ -1,14 +1,60 @@
-# loop-subgroups
+# lean-loop-subgroups
 
 A Lean 4 formalization of J. Breitner, *Loop subgroups of F_r and the image of their stabilizer
-subgroups in GL_r(Z)* (Israel J. Math. 191 (2012), 545–557,
-[doi:10.1007/s11856-011-0213-3](https://doi.org/10.1007/s11856-011-0213-3);
-[arXiv:1012.2729](https://arxiv.org/abs/1012.2729)), built on Mathlib and
-[Tau Ceti](https://github.com/TauCetiProject/TauCeti).
+subgroups in GL_r(Z)*, Israel J. Math. 191 (2012), 545–557
+([doi:10.1007/s11856-011-0213-3](https://doi.org/10.1007/s11856-011-0213-3);
+[arXiv:1012.2729](https://arxiv.org/abs/1012.2729)), and of further material from the author's
+Diplomarbeit (KIT), whose LaTeX source is included as `Diplomarbeit.tex`. It builds on Mathlib
+and [Tau Ceti](https://github.com/TauCetiProject/TauCeti).
 
-There is no `sorry`, and the only axioms used are `propext`, `Classical.choice` and `Quot.sound`.
-`BLUEPRINT.md` maps each statement of the paper to its Lean declaration.
-`formalization.yaml` (v0.4) holds the metadata for Palomar.
+**This formalization was autoformalized by Claude** (Anthropic's Claude Opus 5.5, in Claude Code).
+The author of the paper chose the target, the libraries and the scope; Claude wrote all Lean
+code, the statements, and this documentation, using several AI sub-agents for individual parts
+and for review. The Lean kernel checks every proof. The correspondence between the formal
+statements and the paper was checked by AI review; human review of the statement of record
+(`Challenge.lean`) by the author is pending.
+
+There is no `sorry` outside `Challenge.lean`, and the only axioms used are `propext`,
+`Classical.choice` and `Quot.sound`. `BLUEPRINT.md` maps each statement of the paper and the
+thesis to its Lean declaration. `formalization.yaml` (v0.4) holds the metadata for
+[Palomar](https://palomar-registry.org/).
+
+## The statement of record: `Challenge.lean`
+
+`Challenge.lean` is a short, self-contained file (importing only Mathlib) that states the main
+result; `Solution.lean` proves exactly these statements from the library, which
+[`lake comparator`](https://github.com/leanprover/comparator) checks (`comparator.json`).
+
+* **Setting.** `G` is a free group with a basis `b = (b_i)_{i ∈ ι}` of finite rank `r = |ι|`.
+  `B(γ)` is the integer matrix with entries `B(γ)_{ij} = #_{b_i} γ(b_j)`, the exponent sum of
+  `b_i` in `γ(b_j)`; this is the action of `γ` on the abelianization `ℤ^r` (`autMatrix`).
+* **Loop subgroups (Definition 1, `IsLoopSubgroup`).** `U ≤ G` is an `s_1/…/s_r` loop subgroup if
+  each `b_i` acts on the left cosets `G ⧸ U` either trivially (then `s_i = 1`, a *looplet*) or as a
+  single cycle of length `s_i` through the coset `U`, and two different generators move no common
+  coset other than `U`.
+* **Theorem 1 (`main`).** If `U` is an `s_1/…/s_r` loop subgroup of finite index, `r ≥ 3`, and at
+  most `r − 2` of the `s_i` equal `1`, then an invertible integer matrix `M` equals `B(γ)` for an
+  automorphism `γ` with `γ(U) = U` if and only if `v · M ≡ v (mod 2)`, where `v_i = 1` if `s_i` is
+  even and `v_i = 0` otherwise. So `B(Stab U)` is a congruence subgroup of level 2, and all of
+  `GL_r(ℤ)` when all loops are odd.
+* **Existence (`exists_isLoopSubgroup`).** For all `s_i ≥ 1` the free group `FreeGroup ι` with its
+  standard basis has an `s_1/…/s_r` loop subgroup, of index `1 + Σ (s_i − 1)`, so the hypotheses
+  of Theorem 1 can be met.
+
+**Differences from the paper in the statement of record.** Finite index of `U` is a hypothesis of
+`main`; the paper works with subgroups of a fixed finite index throughout, and the library proves
+that it follows from Definition 1 when all `s_i ≥ 1` (`IsLoopSubgroup.finiteIndex`, standard
+basis). The cases excluded by the hypotheses (`r ≤ 2`, or `r − 1` looplets) are not covered by
+`main`; the `r − 1` case is Proposition 18, proved in the library (`Excluded.lean`, standard basis)
+but not part of the Challenge.
+
+**Proof outline.** The upper bound (Proposition 16) holds for every finite-index subgroup: an
+automorphism stabilizing `U` permutes the cosets compatibly with the action, so it preserves the
+parity of each generator's permutation, which gives `v · B(γ) ≡ v`. For the lower bound one writes
+down, for generators of the target group, automorphisms of the form `b_j ↦ w·x·b_j` stabilizing
+`U`, where `w` is a commutator word chosen (Lemma 5) so that `w·x` acts trivially on the cosets; a
+generating set of the principal congruence subgroup `Γ_2` (Remark 6) and of the vector stabilizer
+`S(v)` in `GL_r(ℤ/2)` (Lemma 8) then gives everything.
 
 ## What is proved
 
@@ -85,6 +131,18 @@ Bass–Milnor–Serre). That would follow from the target `sinteger_relative_ele
 of the unclaimed Tau Ceti roadmap
 [KTheoryLowDegrees](https://github.com/TauCetiProject/TauCetiRoadmap/tree/main/TauCetiRoadmap/KTheoryLowDegrees)
 (Layers 9–11).
+
+## Sources, previous work, licence
+
+* **Sources.** The formalization follows the paper and, for proof details and the additional
+  material, the Diplomarbeit (included). A literature search (zbMATH, Crossref, OpenAlex,
+  Semantic Scholar, targeted full-text checks; Google Scholar and MathSciNet were not accessible)
+  found no work citing, duplicating or generalizing the paper's main results; novelty of the
+  mathematics is therefore as in the 2011 paper, and no claim beyond that is made.
+* **Previous formalizations.** None known of these results. The development uses Mathlib and
+  Tau Ceti (elementary matrices, generation of `SL_n(ℤ)`, Hopfian property and Schreier index
+  formula for free groups).
+* **Licence.** Apache-2.0 (`LICENSE`). The included thesis source is the author's.
 
 ## Building
 

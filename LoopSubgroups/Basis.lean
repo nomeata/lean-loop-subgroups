@@ -1,6 +1,10 @@
-import LoopSubgroups.Existence
-import TauCeti.GroupTheory.FreeGroup.Hopfian
-import TauCeti.GroupTheory.FreeGroup.Schreier
+module
+
+public import LoopSubgroups.Existence
+public import TauCeti.GroupTheory.FreeGroup.Hopfian
+public import TauCeti.GroupTheory.FreeGroup.Schreier
+
+@[expose] public section
 
 /-!
 # A free basis of the loop subgroup (paper, after Example 2)
