@@ -4,7 +4,7 @@ Formalization of J. Breitner, *Loop subgroups of F_r and the image of their stab
 subgroups in GL_r(Z)*, Israel J. Math. 191 (2012), 545–557,
 [doi:10.1007/s11856-011-0213-3](https://doi.org/10.1007/s11856-011-0213-3),
 [arXiv:1012.2729](https://arxiv.org/abs/1012.2729). The same material is the loop-subgroup chapter
-of the Diplomarbeit (`Diplomarbeit.tex`).
+of the author's Diplomarbeit (Karlsruher Institut für Technologie).
 
 Built on Mathlib and [Tau Ceti](https://github.com/TauCetiProject/TauCeti). From Tau Ceti we use
 `TauCeti.transvectionUnit` (elementary matrices in `GL`), the Chevalley commutator relation
