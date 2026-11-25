@@ -78,6 +78,14 @@ There is no `sorry`, and the only axioms used are `propext`, `Classical.choice` 
   * the discussion examples and the GAP table;
   * chapter 1, which Mathlib already covers.
 
+## Possible future work via Tau Ceti
+
+The thesis's congruence-level detection needs `Γ_l = ⟪X₁₂^l⟫` in `SL_r(ℤ)`, `r ≥ 3` (Mennicke,
+Bass–Milnor–Serre). That would follow from the target `sinteger_relative_elementary_generation`
+of the unclaimed Tau Ceti roadmap
+[KTheoryLowDegrees](https://github.com/TauCetiProject/TauCetiRoadmap/tree/main/TauCetiRoadmap/KTheoryLowDegrees)
+(Layers 9–11).
+
 ## Building
 
 ```
