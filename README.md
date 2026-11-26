@@ -15,7 +15,9 @@ The Lean kernel checks every proof.
 There is no `sorry` outside `Challenge.lean`, and the only axioms used are `propext`,
 `Classical.choice` and `Quot.sound`. `BLUEPRINT.md` maps each statement of the paper and the
 thesis to its Lean declaration. `formalization.yaml` (v0.4) holds the metadata for
-[Palomar](https://palomar-registry.org/).
+[Palomar](https://palomar-registry.org/). The repository is prepared for Palomar but not registered there: Palomar's
+verifier builds the whole Tau Ceti library from source for any project that depends on it, and
+this build ran out of memory on Palomar's runners (November 2026).
 
 ## The statement of record: `Challenge.lean`
 
